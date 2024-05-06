@@ -1,0 +1,24 @@
+{
+	"name": "ventiapp",
+	"version": "0.0.1",
+	"description": "Backend en Nodejs para llevar el control de todas las herramientas que Ventiapp tiene a su disposicion",
+	"main": "app.mjs",
+	"scripts": {
+		"start": "node app.mjs",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"ventiapp",
+		"nodejs",
+		"mexico",
+		"devemvt"
+	],
+	"author": "devemvt",
+	"license": "GPL-3.0-or-later",
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"fs": "^0.0.1-security",
+		"https": "^1.0.0"
+	}
+}
