@@ -1,5 +1,6 @@
 import express from 'express';
 import loggerService from '../services/logger.service.mjs';
+import cacheService from '../services/cache.service.mjs';
 
 /**
  * Instancia de la aplicación Express.
@@ -12,6 +13,13 @@ const app = express();
  * Establecer un limite de 20mb para las peticiones.
 **/
 app.use( express.json( { limit: '20mb' } ) );
+
+// Agregar la cache a la request.
+app.use( (req, res, next) => {
+	req.cache = cache; // Agregar la instancia de cache a la solicitud (req)
+	next();
+});
+
 
 /**
  * Ruta default: Responde con un mensaje indicando que la aplicación está corriendo.
