@@ -120,7 +120,7 @@ class ArchivosService {
 	 * 
 	 * @async @method
 	 * @returns {Promise<string|null>} Una promesa que se resuelve con el contenido del archivo
-	 * como una cadena de texto, o null si el archivo no existe o no se puede leer.
+	 * como una cadena de texto, o null si el archivo no existe.
 	**/
 	leerArchivo() {
 		try {
