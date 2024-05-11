@@ -8,6 +8,15 @@ import cacheService from '../services/cache.service.mjs';
 **/
 const app = express();
 
+// Middleware para manejar solicitudes OPTIONS.
+app.options('*', (req, res) => {
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Permitir cualquier origen.
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH'); // Permitir solo esos métodos.
+	res.setHeader('Access-Control-Allow-Headers', '*'); // Permitir cualquier encabezado.
+	res.status(200).end();
+});
+
+
 /**
  * Middleware para analizar el cuerpo de las peticiones como JSON.
  * Establecer un limite de 20mb para las peticiones.
