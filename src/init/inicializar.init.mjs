@@ -1,15 +1,13 @@
 import LoginService from '../services/login.service.mjs';
 import dotenv from 'dotenv';
-import cacheService from '../services/cache.service.mjs';
+import loggerService from '../services/logger.service.mjs';
 
 // Cargar la configuración del archivo de variables.
 dotenv.config();
 
-// todo implementar la cache, si ya esta el token en el archivo tomarlo, validar que no este expirado
 // Caso contrario obtener el access_token
 class InicializarService {
 	constructor() {
-		this.cache = cacheService;
 		this.#iniciarVariables();
 	}
 
@@ -35,7 +33,14 @@ class InicializarService {
 	}
 
 	async #iniciarVariables() {
-		this.#obtenerAccessToken();
+		try {
+			this.#obtenerAccessToken();
+		} catch (error) {
+			// Registrar el evento.
+			const mensaje = `┌ Mensaje: ${error.message}`;
+			const Error = `\n└ Error: ${error}`
+			loggerService.escribirLog('error', `${mensaje}${Error}`);
+		}
 	}
 }
 
