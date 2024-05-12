@@ -1,4 +1,5 @@
 import express from 'express';
+import router from '../routes/router.route.mjs';
 import loggerService from '../services/logger.service.mjs';
 import cacheService from '../services/cache.service.mjs';
 
@@ -29,6 +30,14 @@ app.use( (req, res, next) => {
 	next();
 });
 
+/**
+ * Agregar el router principal.
+ * 
+ * @name router
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
+**/
+app.use( '/', router );
 
 /**
  * Ruta default: Responde con un mensaje indicando que la aplicación está corriendo.
