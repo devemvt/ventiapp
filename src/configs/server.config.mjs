@@ -25,7 +25,7 @@ app.use( express.json( { limit: '20mb' } ) );
 
 // Agregar la cache a la request.
 app.use( (req, res, next) => {
-	req.cache = cache; // Agregar la instancia de cache a la solicitud (req)
+	req.cache = cacheService; // Agregar la instancia de cache a la solicitud (req)
 	next();
 });
 
