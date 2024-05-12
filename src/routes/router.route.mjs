@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { categoriaRouter } from './categorias/categoria.route.mjs';
 import { facturaRouter } from './facturas/factura.route.mjs';
 import { mensajeRouter } from './mensajes/mensaje.route.mjs';
@@ -21,8 +21,8 @@ const router = express.Router();
  * 
  * @name categoriaRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/categoria', categoriaRouter );
 
@@ -31,8 +31,8 @@ router.use( '/categoria', categoriaRouter );
  * 
  * @name facturaRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/factura', facturaRouter );
 
@@ -41,8 +41,8 @@ router.use( '/factura', facturaRouter );
  * 
  * @name mensajeRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/mensaje', mensajeRouter );
 
@@ -51,8 +51,8 @@ router.use( '/mensaje', mensajeRouter );
  * 
  * @name precioRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/precio', precioRouter );
 
@@ -61,8 +61,8 @@ router.use( '/precio', precioRouter );
  * 
  * @name productoRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/producto', productoRouter );
 
@@ -71,8 +71,8 @@ router.use( '/producto', productoRouter );
  * 
  * @name publicacionRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/publicacion', publicacionRouter );
 
@@ -81,8 +81,8 @@ router.use( '/publicacion', publicacionRouter );
  * 
  * @name stockRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/stock', stockRouter );
 
@@ -91,8 +91,8 @@ router.use( '/stock', stockRouter );
  * 
  * @name ventaRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/venta', ventaRouter );
 
@@ -101,8 +101,8 @@ router.use( '/venta', ventaRouter );
  * 
  * @name webhookRouter
  * @memberof router
- * @param path
- * @param route
+ * @param {string} path - Ruta de la solicitud.
+ * @param {Router} route - Router a utilizar.
 **/
 router.use( '/webhook', webhookRouter );
 
