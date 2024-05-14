@@ -24,10 +24,11 @@ const router = express.Router();
  * @name obtenerCategoria
  * @function @inner
  * @memberof obtenerRouter
- * @param {string} path - Ruta de la solicitud.
+ * @param {string} [canal] - Ruta de la solicitud, puede incluir de forma opcional un canal
+ * en especifico del cual se desea obtener las categorías.
  * @param {Controller} controller - Controller a utilizar.
 **/
-router.get( '/', obtenerCategoriaController );
+router.get( '/:canal?', obtenerCategoriaController );
 
 /**
  * Exporta el router como `obtenerRouter`.
