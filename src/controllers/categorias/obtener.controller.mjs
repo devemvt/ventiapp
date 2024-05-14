@@ -1,3 +1,4 @@
+import obtenerUtil from '../../utils/categorias/obtener.util.mjs';
 /**
  * Controlador para obtener una categoría de un marketplace o ecommerce.
  * 
@@ -8,9 +9,12 @@
 **/
 const obtenerCategoriaController = async (req, res) => {
 	try {
+		obtenerUtil.validarEntarda( req.params );
 		res.status(200).send('Categoría obtenida.');
 	} catch ( error ) {
-		res.status(500).send('Error al obtener la categoría.');
+		res.status(500).json({
+			mensaje: 'Error al obtener la categoría.', detalle: error.message
+		});
 	}
 }
 
