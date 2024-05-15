@@ -1,7 +1,6 @@
 import app from '../configs/server.config.mjs';
 import loggerService from '../services/logger.service.mjs';
 import dotenv from 'dotenv';
-import InicializarService from './inicializar.init.mjs';
 
 // Cargar la configuración del archivo de variables.
 dotenv.config();
