@@ -10,7 +10,12 @@ import obtenerUtil from '../../utils/categorias/obtener.util.mjs';
 const obtenerCategoriaController = async (req, res) => {
 	try {
 		obtenerUtil.validarEntarda( req.params );
-		res.status(200).send('Categoría obtenida.');
+		const categorias = await obtenerUtil.obtenerCategoria(
+			req.cache.get('access_token'),
+			req.params.canal
+		);
+
+		res.status(200).json({datos: categorias});
 	} catch ( error ) {
 		res.status(500).json({
 			mensaje: 'Error al obtener la categoría.', detalle: error.message
