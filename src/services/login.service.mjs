@@ -28,6 +28,12 @@ class LoginService {
 	#tipo;
 
 	/**
+	 * Token de acceso.
+	 * @type {string}
+	**/
+	#access_token;
+
+	/**
 	 * Crea una instancia de LoginService.
 	 * 
 	 * @constructor
@@ -64,7 +70,7 @@ class LoginService {
 	/**
 	 * Método privado para saber si el token actual ya expiro de forma local.
 	 * 
-	 * @function @private
+	 * @async @function @private
 	 * @returns {boolean|null} Devuelve true si la fecha de hoy es mayor a la de expiración,
 	 * false en caso contrario, null en caso de que el json de configuración no exista.
 	**/
@@ -96,6 +102,12 @@ class LoginService {
 			const hoy = new Date();
 			hoy.setHours(0,0,0,0);
 
+			// Guardar el token para su posterior uso.
+			this.#access_token = datosJson.access_token;
+
+			// Limpiar los datos ya que no seran requeridos.
+			this.#constrasenna = this.#tipo = this.#usuario = null;
+
 			// Devolver true si la fecha de hoy es mayor a la de expiración, false en caso contrario.
 			return hoy > fechaExpiracion;
 		} catch ( error ) {
@@ -108,7 +120,7 @@ class LoginService {
 	 * Metodo para iniciar sesión y obtener el token de acceso.
 	 * 
 	 * @async @method
-	 * @returns {Promise<JSON>} Una promesa que se resuelve una vez que se haya iniciado sesión.
+	 * @returns {Promise<string>} Una promesa que se resuelve una vez que se haya iniciado sesión.
 	**/
 	async inicarSesion() {
 		try {
@@ -138,6 +150,14 @@ class LoginService {
 					const datos = {};
 					datos.access_token = respuesta.data.access_token,
 					datos.expires_in = expiraEn;
+
+					// Guardar el token para su posterior uso.
+					this.#access_token = datos.access_token;
+
+					// Limpiar los datos ya que no seran requeridos.
+					this.#constrasenna = this.#tipo = this.#usuario = null;
+
+					// Guardad los datos en el json de configuración.
 					this.jsonService.guardarJson(datos);
 				}
 				else {
@@ -145,13 +165,25 @@ class LoginService {
 					const datos = await this.jsonService.obtenerJson();
 					datos.access_token = respuesta.data.access_token,
 					datos.expires_in = expiraEn;
+
+					// Guardad los datos en el json de configuración.
 					this.jsonService.guardarJson(datos);
 				}
+
 				// Registrar el evento.
 				const mensaje = '┌ Mensaje: Token generado';
 				const expira = `\n└ Expira: ${expiraEn}`
 				loggerService.escribirLog('info', `${mensaje}${expira}`);
 			}
+
+			// Obtener el token de forma local.
+			const access_toke = this.#access_token;
+
+			// Limpiar el token ya que no seran requeridos.
+			this.#access_token = null;
+
+			// Devolver el token.
+			return access_toke;
 		} catch ( error ) {
 			// Error generado por la petición.
 			if ( error.response ) {
