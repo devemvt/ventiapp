@@ -2,6 +2,11 @@ import express from 'express';
 import router from '../routes/router.route.mjs';
 import loggerService from '../services/logger.service.mjs';
 import cacheService from '../services/cache.service.mjs';
+import InicializarService from '../init/inicializar.init.mjs';
+
+const datosCache = await InicializarService.iniciarVariables();
+
+cacheService.set( 'access_token', datosCache.access_token );
 
 /**
  * Instancia de la aplicación Express.

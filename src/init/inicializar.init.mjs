@@ -7,9 +7,8 @@ dotenv.config();
 
 // Caso contrario obtener el access_token
 class InicializarService {
-	constructor() {
-		this.#iniciarVariables();
-	}
+	
+	constructor() {}
 
 	/**
 	 * Método privado para obtener el access_toke.
@@ -19,23 +18,40 @@ class InicializarService {
 	**/
 	async #obtenerAccessToken() {
 		try {
+			// Instanciar la clase con los datos.
 			const loginService = new LoginService(
 				process.env.VENTIAPP_USERNAME,
 				process.env.VENTIAPP_PASSWORD,
 				process.env.VENTIAPP_GRANT_TYPE
 			);
 		
-			await loginService.inicarSesion();
+			// Obtener el token de acceso.
+			const access_token = await loginService.inicarSesion();
+
+			// Devolver el token.
+			return access_token;
 
 		} catch ( error ) {
+			// Propagar el error.
 			throw error;
 		}
 	}
 
-	async #iniciarVariables() {
+	/**
+	 * Método publico para inicializar todos los datos.
+	 * 
+	 * @async @function @public
+	 * @returns {Promise<JSON>} Una promesa que resuelve el inicializar las variables.
+	**/
+	async iniciarVariables() {
 		try {
-			this.#obtenerAccessToken();
-		} catch (error) {
+			const datos = {};
+			// Obtener el token de acceso.
+			datos.access_token = await this.#obtenerAccessToken();
+
+			// Devolver los datos inicializados.
+			return datos;
+		} catch ( error ) {
 			// Registrar el evento.
 			const mensaje = `┌ Mensaje: ${error.message}`;
 			const Error = `\n└ Error: ${error}`
